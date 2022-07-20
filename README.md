@@ -41,9 +41,6 @@ The default port is 5000 at the moment in application.yml file.
 ## Correct Result
 ![Correct Result](/images/correctResult.png?raw=true "Correct Result")
 
-## CI/CD Pipeline
-![CI/CD Pipeline](/images/cicdPipeline.png?raw=true "CI/CD Pipeline")
-
 ## Code Coverage
 
 ### Jacoco is used for code coverage for Java Code or Spring Boot, can be found in Jacoco Folder
