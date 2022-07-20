@@ -1,0 +1,8 @@
+<nav>
+  <button type="button" (click)="toggleEditor('temperature')">Temperature Converter</button>
+  <button type="button" (click)="toggleEditor('volume')">Volume Converter</button>
+</nav>
+
+<app-temperature-converter *ngIf="showTemperatureConverter"></app-temperature-converter>
+
+<app-volume-converter *ngIf="showVolumeConverter"></app-volume-converter>

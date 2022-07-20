@@ -1,0 +1,74 @@
+<h1>Volume Converter</h1>
+<div class="container">
+  <div class="row">
+    <form [formGroup]="volumeForm" (ngSubmit)="onSubmit()">
+      <div class="col-sm">
+        <label for="input-numerical-value">Input Numerical Value of Volume: </label>
+        <input id="input-numerical-value" type="text" formControlName="inputNumericalValue">
+        <div *ngIf="!volumeForm.controls['inputNumericalValue'].valid && volumeForm.controls['inputNumericalValue'].touched">
+          <div *ngIf="volumeForm.controls['inputNumericalValue'].errors?.['required']" class="alert alert-danger col-md-6">
+            Numerical Value is required.
+          </div>
+          <div *ngIf="volumeForm.controls['inputNumericalValue'].errors?.['pattern']" class="alert alert-danger col-md-6">
+            Only Numbers are allowed
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm">
+        <label for="input-unit-of-measure">Input Unit of Measure For Volume: </label>
+        <select id="input-unit-of-measure" formControlName="inputUnitOfMeasure" (change)="changeVolumeInput($event)">
+          <option value="">Choose a unit of measure of volume</option>
+          <option *ngFor="let volume of volumeList">{{volume}}</option>
+        </select>
+        <div *ngIf="!volumeForm.controls['inputUnitOfMeasure'].valid && volumeForm.controls['inputUnitOfMeasure'].touched">
+          <div *ngIf="volumeForm.controls['inputUnitOfMeasure'].errors?.['required']" class="alert alert-danger col-md-6">
+            Select a input unit of measure, it is required.
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm">
+        <label for="target-unit-of-measure">Target Unit of Measure For Volume: </label>
+        <select id="target-unit-of-measure" formControlName="targetUnitOfMeasure" (change)="changeVolumeTarget($event)">
+          <option value="">Choose a unit of measure of volume</option>
+          <option *ngFor="let volume of volumeList">{{volume}}</option>
+        </select>
+        <div *ngIf="!volumeForm.controls['targetUnitOfMeasure'].valid && volumeForm.controls['targetUnitOfMeasure'].touched">
+          <div *ngIf="volumeForm.controls['targetUnitOfMeasure'].errors?.['required']" class="alert alert-danger col-md-6">
+            Select a target unit of measure, it is required.
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm">
+        <label for="student-response">Student Response For Volume: </label>
+        <input id="student-response" type="text" formControlName="studentResponse">
+        <div *ngIf="!volumeForm.controls['studentResponse'].valid && volumeForm.controls['studentResponse'].touched">
+          <div *ngIf="volumeForm.controls['studentResponse'].errors?.['required']" class="alert alert-danger col-md-6">
+            Student Response is required.
+          </div>
+          <div *ngIf="volumeForm.controls['studentResponse'].errors?.['pattern']" class="alert alert-danger col-md-6">
+            Only Numbers are allowed
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm">
+        <div *ngIf="output=='incorrect'">
+          <label>Output: </label>
+          <input readonly formControlName="output" class="col-md-6 alert alert-danger">
+        </div>
+        <div *ngIf="output=='correct'">
+          <label>Output: </label>
+          <input readonly formControlName="output" class="col-md-6 alert alert-success">
+        </div>
+      </div>
+
+      <p>Complete the form to enable button.</p>
+      <button type="submit" class="btn btn-primary" [disabled]="!volumeForm.valid">Convert</button>
+      <button type="button" class="btn btn-dark"  (click)="volumeForm.reset()">Reset</button>
+    </form>
+  </div>
+</div>
+<hr>

@@ -1,0 +1,74 @@
+<h1>Temperature Converter</h1>
+<div class="container">
+  <div class="row">
+    <form [formGroup]="temperatureForm" (ngSubmit)="onSubmit()">
+      <div class="col-sm">
+        <label for="input-numerical-value">Input Numerical Value of Temperature: </label>
+        <input id="input-numerical-value" type="text" formControlName="inputNumericalValue">
+        <div *ngIf="!temperatureForm.controls['inputNumericalValue'].valid && temperatureForm.controls['inputNumericalValue'].touched">
+          <div *ngIf="temperatureForm.controls['inputNumericalValue'].errors?.['required']" class="alert alert-danger col-md-6">
+            Numerical Value is required.
+          </div>
+          <div *ngIf="temperatureForm.controls['inputNumericalValue'].errors?.['pattern']" class="alert alert-danger col-md-6">
+            Only Numbers are allowed
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm">
+        <label for="input-unit-of-measure">Input Unit of Measure For Temperature: </label>
+        <select id="input-unit-of-measure" formControlName="inputUnitOfMeasure" (change)="changeTemperatureInput($event)">
+          <option value="">Choose a unit of measure of temperature</option>
+          <option *ngFor="let temperature of temperatureList">{{temperature}}</option>
+        </select>
+        <div *ngIf="!temperatureForm.controls['inputUnitOfMeasure'].valid && temperatureForm.controls['inputUnitOfMeasure'].touched">
+          <div *ngIf="temperatureForm.controls['inputUnitOfMeasure'].errors?.['required']" class="alert alert-danger col-md-6">
+            Select a input unit of measure, it is required.
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm">
+        <label for="target-unit-of-measure">Target Unit of Measure For Temperature: </label>
+        <select id="target-unit-of-measure" formControlName="targetUnitOfMeasure" (change)="changeTemperatureTarget($event)">
+          <option value="">Choose a unit of measure of temperature</option>
+          <option *ngFor="let temperature of temperatureList">{{temperature}}</option>
+        </select>
+        <div *ngIf="!temperatureForm.controls['targetUnitOfMeasure'].valid && temperatureForm.controls['targetUnitOfMeasure'].touched">
+          <div *ngIf="temperatureForm.controls['targetUnitOfMeasure'].errors?.['required']" class="alert alert-danger col-md-6">
+            Select a target unit of measure, it is required.
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm">
+        <label for="student-response">Student Response For Temperature: </label>
+        <input id="student-response" type="text" formControlName="studentResponse">
+        <div *ngIf="!temperatureForm.controls['studentResponse'].valid && temperatureForm.controls['studentResponse'].touched">
+          <div *ngIf="temperatureForm.controls['studentResponse'].errors?.['required']" class="alert alert-danger col-md-6">
+            Student Response is required.
+          </div>
+          <div *ngIf="temperatureForm.controls['studentResponse'].errors?.['pattern']" class="alert alert-danger col-md-6">
+            Only Numbers are allowed
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm">
+        <div *ngIf="output=='incorrect'">
+          <label>Output: </label>
+          <input readonly formControlName="output" class="col-md-6 alert alert-danger">
+        </div>
+        <div *ngIf="output=='correct'">
+          <label>Output: </label>
+          <input readonly formControlName="output" class="col-md-6 alert alert-success">
+        </div>
+      </div>
+
+      <p>Complete the form to enable button.</p>
+      <button type="submit" class="btn btn-primary" [disabled]="!temperatureForm.valid">Convert</button>
+      <button type="button" class="btn btn-dark"  (click)="temperatureForm.reset()">Reset</button>
+    </form>
+  </div>
+</div>
+<hr>
